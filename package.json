@@ -1,0 +1,15 @@
+{
+  "name": "cordova-plugin-gtm",
+  "version": "1.0.0",
+  "description": "Plugin for Integration with GTM functionality",
+  "cordova": {
+    "id": "cordova-plugin-gtm",
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  },
+  "keywords": [
+  ],
+  "author": "IBM CIC Baton Rouge Development Team"  
+}

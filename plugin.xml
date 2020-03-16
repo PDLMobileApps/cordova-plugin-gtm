@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License.
+-->
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="cordova-plugin-gtm"
+    version="1.0.0">
+    <name>GtmPlugin</name>
+    <description>Cordova plugin for integration with GTM functionality</description>
+    
+    <js-module src="www/GtmPlugin.js" name="gtmPlugin">
+        <clobbers target="gtmPlugin" />
+    </js-module>
+    
+    <!-- iOS -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="GtmPlugin">
+                <param name="ios-package" value="GtmPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+        <config-file target="config.xml" parent="/*">
+            <feature name="GTManagerPlugin">
+                <param name="ios-package" value="GTManagerPlugin" />
+                <param name="onload" value="true"/>
+            </feature>
+        </config-file>
+        
+        <source-file src="src/ios/GtmPlugin.swift" target-dir="src/com/foodlion/mobile" />
+        <header-file src="src/ios/GTManagerPlugin.h" />
+        <source-file src="src/ios/GTManagerPlugin.m" />
+        <source-file src="src/ios/GTM/libGoogleAnalyticsServices.a" framework="true" />
+        <source-file src="src/ios/GTM/GTM-PS2GMGX" />
+        <header-file src="src/ios/GTM/TAGContainer.h" />
+        <header-file src="src/ios/GTM/TAGContainerOpener.h" />
+        <header-file src="src/ios/GTM/TAGDataLayer.h" />
+        <header-file src="src/ios/GTM/TAGLogger.h" />
+        <header-file src="src/ios/GTM/TAGManager.h" />
+
+        <header-file src="src/ios/GoogleAnalytics/GAI.h" />
+        <header-file src="src/ios/GoogleAnalytics/GAIDictionaryBuilder.h" />
+        <header-file src="src/ios/GoogleAnalytics/GAIEcommerceFields.h" />
+        <header-file src="src/ios/GoogleAnalytics/GAIEcommerceProduct.h" />
+        <header-file src="src/ios/GoogleAnalytics/GAIEcommerceProductAction.h" />
+        <header-file src="src/ios/GoogleAnalytics/GAIEcommercePromotion.h" />
+        <header-file src="src/ios/GoogleAnalytics/GAIFields.h" />
+        <header-file src="src/ios/GoogleAnalytics/GAILogger.h" />
+        <header-file src="src/ios/GoogleAnalytics/GAITrackedViewController.h" />
+        <header-file src="src/ios/GoogleAnalytics/GAITracker.h" />
+
+        <!-- Uncomment if cordova-plugin-add-swift-support gets removed from main config.xml -->
+        <!-- <dependency id="cordova-plugin-add-swift-support" version="2.0.2"/> -->
+    </platform>
+    <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="GTManagerPlugin">
+                <param name="android-package" value="com.foodlion.mobile.GTManagerPlugin" />
+                <param name="onload" value="true"/>
+            </feature>
+            <feature name="GtmPlugin">
+                <param name="android-package" value="com.foodlion.mobile.GtmPlugin" />
+                <param name="onload" value="true"/>
+            </feature>
+        </config-file>
+
+        <framework src="com.google.android.gms:play-services-analytics:9.2.0" />
+        <source-file src="src/android/GTManagerPlugin.java" target-dir="src/com/foodlion/mobile"/>
+        <source-file src="src/android/GtmPlugin.java" target-dir="src/com/foodlion/mobile" />
+
+        <!-- Add support for devices without Google Play Services installed. -->
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <receiver android:name="com.google.android.gms.analytics.AnalyticsReceiver" android:enabled="true">
+                <intent-filter>
+                <action android:name="com.google.android.gms.analytics.ANALYTICS_DISPATCH" />
+                </intent-filter>
+            </receiver>
+            <service android:name="com.google.android.gms.analytics.AnalyticsService" android:enabled="true" android:exported="false"/>
+        </config-file>
+    </platform>
+    
+</plugin>
