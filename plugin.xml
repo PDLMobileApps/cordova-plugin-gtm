@@ -81,7 +81,7 @@
             </feature>
         </config-file>
 
-        <framework src="com.google.android.gms:play-services-analytics:9.2.0" />
+        <framework src="com.google.android.gms:play-services-analytics:17.+" />
         <source-file src="src/android/GTManagerPlugin.java" target-dir="src/com/foodlion/mobile"/>
         <source-file src="src/android/GtmPlugin.java" target-dir="src/com/foodlion/mobile" />
 
